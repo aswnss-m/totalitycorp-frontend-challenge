@@ -3,6 +3,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import * as ReactDOM from 'react-dom/client'
 // 1. Import the extendTheme function
 import { extendTheme } from '@chakra-ui/react'
+import "./common/styles.css"
+
+import App from './App'
 
 const colors = {
   brand: {
