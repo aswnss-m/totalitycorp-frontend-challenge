@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from "./Home.module.css";
+import styles from "./styles/Home.module.css";
 import {
     Input,
     Stack,
@@ -12,12 +12,16 @@ import {
     RadioGroup
 } from '@chakra-ui/react'
 import ItemCard from './components/Card';
+import { products } from '../assets';
 
 function Home() {
     const [search, setSearch] = useState('')
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('All')
     const [price, setPrice] = useState('1')
-    
+    const [rating, setRating] = useState(0)
+    const handleChange = (event) => {
+        setCategory(event.target.value)
+    }
     return (
         <div className={
             styles.container
@@ -29,11 +33,11 @@ function Home() {
                     <Heading size='sm'>Filter</Heading>
                     <FormControl>
                         <FormLabel>Category</FormLabel>
-                        <Select placeholder='Select option'>
-                            <option value='option1'>All</option>
-                            <option value='option1'>Gadgets</option>
-                            <option value='option2'>Phones</option>
-                            <option value='option3'>Fashion</option>
+                        <Select onChange={handleChange} value={category}>
+                            <option value='All'>All</option>
+                            <option value='Shoes'>Shoes</option>
+                            <option value='Clothing'>Clothing</option>
+                            <option value='Accessories'>Accessories</option>
                         </Select>
                     </FormControl>
                     <FormControl>
@@ -47,13 +51,15 @@ function Home() {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Ratings</FormLabel>
-                        <Select>
-                            <option value='option1'>All</option>
-                            <option value='option1'>5+</option>
-                            <option value='option1'>4+</option>
-                            <option value='option2'>3+</option>
-                            <option value='option3'>2+</option>
-                            <option value='option3'>1+</option>
+                        <Select value={rating} onChange={(e)=>{
+                            setRating(e.target.value)
+                        }}>
+                            <option value='0'>All</option>
+                            <option value='5'>5+</option>
+                            <option value='4'>4+</option>
+                            <option value='3'>3+</option>
+                            <option value='2'>2+</option>
+                            <option value='1'>1+</option>
                         </Select>
                     </FormControl>
                 </VStack>
@@ -71,15 +77,35 @@ function Home() {
         <div className={
             styles.main
         }>
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+            {products.filter((item) => {
+                if (category === 'All') {
+                    return item
+                } else if (item.category === category) {
+                    return item
+                }
+            }).filter((item) => {
+                if (search === '') {
+                    return item
+                } else if (item.name.toLowerCase().includes(search.toLowerCase())) {
+                    return item
+                }
+            }).filter((item)=>{
+                if(rating === 0){
+                    return item
+                }else if(item.rating >= rating){
+                    return item
+                }
+            }).sort((a, b) => {
+                if (price === '1') {
+                    return b.price - a.price
+                } else {
+                    return a.price - b.price
+                }
+            }).map((item) => {
+                return <ItemCard key={item.id} props={item}/>
+            })
+            }
+            
         </div>
     </div>
     )

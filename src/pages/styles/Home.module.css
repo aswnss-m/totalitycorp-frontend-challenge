@@ -25,5 +25,5 @@
     flex-wrap: wrap;
     overflow-y: scroll;
     justify-content: space-evenly;
-    gap: 1em;
+    gap: 3em;
 }

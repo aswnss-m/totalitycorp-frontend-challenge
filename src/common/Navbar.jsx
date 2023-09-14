@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <Flex minWidth='max-content' alignItems='center' gap='2' p={4} bg={'#862633'}>
   <Box p='2' color={'#fff'}>
-    <Heading size='md'>Chakra App</Heading>
+    <Heading size='md'>O Shopy</Heading>
   </Box>
   <Spacer />
   <ButtonGroup gap='2'>
