@@ -38,9 +38,9 @@ function Home() {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Price</FormLabel>
-                        <RadioGroup onChange={(e)=>{setPrice(e.target.value)}} value={price}>
+                        <RadioGroup onChange={setPrice} value={price}>
                             <Stack direction='row'>
-                                <Radio value='1' se>Highest first</Radio>
+                                <Radio value='1'>Highest first</Radio>
                                 <Radio value='2'>Lowest first</Radio>
                             </Stack>
                         </RadioGroup>

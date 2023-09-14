@@ -1,7 +1,8 @@
 .container{
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 10vh 90vh;
+    grid-template-rows: auto auto;
+    height: 92vh;
     grid-template-areas: "sidebar search" "sidebar main";
 }
 
@@ -19,8 +20,9 @@
 .main{
     grid-area: main;
     padding: 1rem;
-    height: 100vw;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
+    gap: 1em;
 }
