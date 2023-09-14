@@ -10,7 +10,10 @@ import {
     Tooltip
 } from '@chakra-ui/react'
 import {BsStar, BsStarFill, BsStarHalf} from 'react-icons/bs'
+import {TiTick} from 'react-icons/ti'
 import {FiShoppingCart} from 'react-icons/fi'
+import React, {useState, useEffect} from 'react'
+
 
 // const data = {
 //     isNew: true,
@@ -23,6 +26,7 @@ import {FiShoppingCart} from 'react-icons/fi'
 
 
 function Rating({rating, numReviews}) {
+
     return (
         <Box display="flex" alignItems="center">
             {
@@ -68,17 +72,36 @@ function ItemCard({props}) {
         numReviews,
         Images,
         id,
-        category
+        category,
     } = props
-    console.log( {
-      name,
-      price,
-      rating,
-      numReviews,
-      Images,
-      id,
-      category
-  })
+    
+    const [cart, setCart] = useState(sessionStorage.getItem('cart') ? JSON.parse(sessionStorage.getItem('cart')) : [])
+    const [inCart, setInCart] = useState(false)
+    useEffect(() => {
+        const found = cart.find((item) => item.id === id)
+        if (found) {
+            setInCart(true)
+        } else {
+            setInCart(false)
+        }
+        sessionStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart, id])
+    const addToCart = () => {
+        const check = cart.every((item) => {
+            return item.id !== id
+        })
+        if (check) {
+            const data = {
+                id: id,
+                quantity: 1
+            }
+            setCart([...cart, data])
+            sessionStorage.setItem('cart', JSON.stringify(cart))
+        } else {
+            alert("The product has been added to cart.")
+        }
+    }
+
     return (
         <Box bg={
                 useColorModeValue('white', 'gray.800')
@@ -111,19 +134,34 @@ function ItemCard({props}) {
                 <Flex mt="1" justifyContent="space-between" alignContent="center">
                     <Box fontSize="md" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
                         {name} </Box>
-                    <Tooltip label="Add to cart" bg="white"
+                        {inCart ? (<Tooltip label="In Cart" bg="white"
                         placement={'top'}
                         color={'gray.800'}
                         fontSize={'0.8em'}>
-                        <chakra.a href={'id'}
-                            display={'flex'}>
+                        <Box>
+                            <Icon as={TiTick}
+                                color={'green.500'}
+                                h={7}
+                                w={7}
+                                alignSelf={'center'}/>
+                        </Box>
+                    </Tooltip>):(
+                        <Tooltip label="Add to cart" bg="white"
+                        
+                        placement={'top'}
+                        color={'gray.800'}
+                        fontSize={'0.8em'}>
+                        <Box onClick={addToCart}>
                             <Icon as={FiShoppingCart}
                                 h={7}
                                 w={7}
                                 alignSelf={'center'}/>
-                        </chakra.a>
+                        </Box>
                     </Tooltip>
+                    )}
+                    
                 </Flex>
+                
 
                 <Flex justifyContent="space-between" alignContent="center">
                     <Rating rating={rating}
