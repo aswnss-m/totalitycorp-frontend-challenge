@@ -79,6 +79,7 @@ function Home() {
             <ItemCard />
             <ItemCard />
             <ItemCard />
+            <ItemCard />
         </div>
     </div>
     )
