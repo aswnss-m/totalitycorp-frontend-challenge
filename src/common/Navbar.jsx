@@ -7,9 +7,6 @@ import {
     Button,
     Heading,
     ButtonGroup,
-    Avatar,
-    AvatarBadge,
-    Link,
     Icon
 } from '@chakra-ui/react'
 import {FiShoppingCart} from 'react-icons/fi'
@@ -51,7 +48,7 @@ function Navbar() {
                             _hover={
                                 {bg: '#f558'}
                         }>Logout</Button>
-                        <Button colorScheme='teal'
+                        <Button 
                             bg={'#f555'}
                             color={'white'}
                             _hover={
