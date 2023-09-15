@@ -18,7 +18,9 @@ function CartPage() {
     const nav = useNavigate()
     const [cart, setCart] = useState(sessionStorage.getItem('cart') ? JSON.parse(sessionStorage.getItem('cart')) : [])
     const [cartProducts, setCartProducts] = useState([])
-
+    if (cart.length === 0) {
+        nav('/')
+    }
     // load product details of cart item
     useEffect(() => {
         const cartProducts = []
@@ -39,18 +41,23 @@ function CartPage() {
     // TODO: Remove item from cart if quantity is 0
     const handleQuantity = (id, add) => {
         const newCart = cartProducts.map((item) => {
-            if (item.id === id) {
-                if (add) {
-                    item.quantity += 1
-                } else if (item.quantity > 0) {
-                    item.quantity -= 1
-                }
+          if (item.id === id) {
+            if (add) {
+              item.quantity += 1;
+            } else if (item.quantity > 1) {
+              item.quantity -= 1;
+            } else {
+              // Delete the item
+              return null;
             }
-            return item
-        })
-        setCartProducts(newCart)
-    }
-    
+          }
+          return item;
+        }).filter((item) => item !== null); // Remove null items from the array
+      
+        setCartProducts(newCart);
+        sessionStorage.setItem('cart', JSON.stringify(newCart));
+      };
+      
     // Calcualte the cost
     const [cost, setCost] = useState(0)
     useEffect(() => {
