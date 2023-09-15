@@ -6,10 +6,9 @@ import {
     Badge,
     useColorModeValue,
     Icon,
-    chakra,
     Tooltip
 } from '@chakra-ui/react'
-import {BsStar, BsStarFill, BsStarHalf, BsWindowFullscreen} from 'react-icons/bs'
+import {BsStar, BsStarFill, BsStarHalf} from 'react-icons/bs'
 import {TiTick} from 'react-icons/ti'
 import {FiShoppingCart} from 'react-icons/fi'
 import React, {useState, useEffect} from 'react'
@@ -100,7 +99,13 @@ function ItemCard({props, handleAddCart}) {
             <Circle size="10px" position="absolute"
                 top={2}
                 right={2}
-                bg="red.200"/>
+                bg={
+                    {
+                        Clothing: 'green.200',
+                        Shoes: 'red.200',
+                        Accessories: 'blue.200'
+                    }[category] || 'gray.200'
+                }/>
 
             <Image src={
                     Images.std
@@ -113,8 +118,14 @@ function ItemCard({props, handleAddCart}) {
             <Box p="6">
                 <Box display="flex" alignItems="baseline">
 
-                    <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                        {category} </Badge>
+                    <Badge rounded="full" px="2" fontSize="0.8em" colorScheme={
+                        {
+                            Clothing: 'green',
+                            Shoes: 'red',
+                            Accessories: 'blue'
+                        }[category] || 'gray'
+                    }>
+                        {category}</Badge>
                 </Box>
                 <Flex mt="1" justifyContent="space-between" alignContent="center">
                     <Box fontSize="md" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
