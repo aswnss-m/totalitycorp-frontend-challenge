@@ -73,34 +73,8 @@ function ItemCard({props}) {
         Images,
         id,
         category,
+        inCart = true
     } = props
-    
-    const [cart, setCart] = useState(sessionStorage.getItem('cart') ? JSON.parse(sessionStorage.getItem('cart')) : [])
-    const [inCart, setInCart] = useState(false)
-    useEffect(() => {
-        const found = cart.find((item) => item.id === id)
-        if (found) {
-            setInCart(true)
-        } else {
-            setInCart(false)
-        }
-        sessionStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart, id])
-    const addToCart = () => {
-        const check = cart.every((item) => {
-            return item.id !== id
-        })
-        if (check) {
-            const data = {
-                id: id,
-                quantity: 1
-            }
-            setCart([...cart, data])
-            sessionStorage.setItem('cart', JSON.stringify(cart))
-        } else {
-            alert("The product has been added to cart.")
-        }
-    }
 
     return (
         <Box bg={
@@ -151,7 +125,7 @@ function ItemCard({props}) {
                         placement={'top'}
                         color={'gray.800'}
                         fontSize={'0.8em'}>
-                        <Box onClick={addToCart}>
+                        <Box>
                             <Icon as={FiShoppingCart}
                                 h={7}
                                 w={7}
