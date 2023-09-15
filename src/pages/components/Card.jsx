@@ -171,7 +171,7 @@ function ItemCard({props, handleAddCart}) {
                         <Box as="span"
                             color={'gray.600'}
                             fontSize="md">
-                            ₹
+                            $
                         </Box>
                         {
                         price.toFixed(2)
