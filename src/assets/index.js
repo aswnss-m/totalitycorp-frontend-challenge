@@ -2,7 +2,7 @@ export const products = [
     {
         "id": "1",
         "name": "TOPAZO SHOES",
-        "price": 5599.0,
+        "price": 10.0,
         "sizes": [
             6,
             7,
@@ -37,7 +37,7 @@ export const products = [
         },
         "id": "2",
         "name": "SUPERSTAR SHOES",
-        "price": 6000.0,
+        "price": 20.0,
         "sizes": [
             6,
             7,
@@ -65,7 +65,7 @@ export const products = [
     {
         "id": "3",
         "name": "GAZELLE SHOES",
-        "price": 10000.0,
+        "price": 30.0,
         "sizes": [
             6,
             7,
@@ -96,7 +96,7 @@ export const products = [
     {
         "id": "4",
         "name": "ULTIMASHOW SHOES",
-        "price": 9000.0,
+        "price": 40.0,
         "sizes": [
             6,
             7,
@@ -126,7 +126,7 @@ export const products = [
     }, {
         "id": "5",
         "name": "ADICOLOR CONTEMPO FRENCH TERRY HOODIE",
-        "price": 8000.0,
+        "price": 50.0,
         "sizes": [
             "S",
             "M",
@@ -154,7 +154,7 @@ export const products = [
     }, {
         "id": "6",
         "name": "HYPERREAL HOODIE",
-        "price": 10000.0,
+        "price": 60.0,
         "sizes": [
             "S",
             "M",
@@ -182,7 +182,7 @@ export const products = [
     }, {
         "id": "7",
         "name": "LINEAR ANKLE CUSHIONED SOCKS 3 PAIRS",
-        "price": 500.0,
+        "price": 70.0,
         "sizes": [
             "2-3",
             "4-5",
@@ -212,7 +212,7 @@ export const products = [
     }, {
         "id": "8",
         "name": "MONOGRAM CLASSIC BACKPACK",
-        "price": 3000.0,
+        "price": 90.0,
         "sizes": [],
         "rating": 3,
         "numReviews": 10,
@@ -235,7 +235,7 @@ export const products = [
     {
         "id": "9",
         "name":"CAP",
-        "price": 1000.0,
+        "price": 100.0,
         "sizes": ["youth", "adult"],
         "rating": 5,
         "numReviews": 10,
