@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import styles from "./styles/Home.module.css";
 import {
     Input,
@@ -22,6 +22,19 @@ function Home() {
     const handleChange = (event) => {
         setCategory(event.target.value)
     }
+    const [cart , setCart] = useState(sessionStorage.getItem('cart') ? JSON.parse(sessionStorage.getItem('cart')) : [])
+    const handleCart = (id) => {
+        const item = cart.find((item) => item.id === id) || false
+        console.log(item)
+        if(!item){
+            setCart([...cart,{id,quantity:1}])
+        }
+        sessionStorage.setItem('cart', JSON.stringify(cart))
+        window.location.reload()
+    }
+    useEffect(()=>{
+        sessionStorage.setItem('cart', JSON.stringify(cart))
+    },[cart])
     return (
         <div className={
             styles.container
@@ -102,7 +115,7 @@ function Home() {
                     return a.price - b.price
                 }
             }).map((item) => {
-                return <ItemCard key={item.id} props={item}/>
+                return <ItemCard key={item.id} props={item} handleAddCart={handleCart}/>
             })
             }
             

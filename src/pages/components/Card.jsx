@@ -9,7 +9,7 @@ import {
     chakra,
     Tooltip
 } from '@chakra-ui/react'
-import {BsStar, BsStarFill, BsStarHalf} from 'react-icons/bs'
+import {BsStar, BsStarFill, BsStarHalf, BsWindowFullscreen} from 'react-icons/bs'
 import {TiTick} from 'react-icons/ti'
 import {FiShoppingCart} from 'react-icons/fi'
 import React, {useState, useEffect} from 'react'
@@ -64,7 +64,7 @@ function Rating({rating, numReviews}) {
     )
 }
 
-function ItemCard({props}) {
+function ItemCard({props, handleAddCart}) {
     const {
         name,
         price,
@@ -73,9 +73,20 @@ function ItemCard({props}) {
         Images,
         id,
         category,
-        inCart = true
     } = props
 
+    const [inCart, setInCart] = useState(false);
+    useEffect(()=>{
+        const cart = JSON.parse(sessionStorage.getItem('cart'))
+        if(cart){
+            cart.forEach(item=>{
+                if(item.id === id){
+                    setInCart(true)
+                }
+            })
+        }
+        // reload window
+    },[])
     return (
         <Box bg={
                 useColorModeValue('white', 'gray.800')
@@ -125,7 +136,9 @@ function ItemCard({props}) {
                         placement={'top'}
                         color={'gray.800'}
                         fontSize={'0.8em'}>
-                        <Box>
+                        <Box onClick={()=>{
+                            handleAddCart(id)
+                        }}>
                             <Icon as={FiShoppingCart}
                                 h={7}
                                 w={7}
