@@ -68,6 +68,7 @@ function CartPage() {
             wrap={'wrap'}
             justifyContent={'center'}
             gap={10}
+            minH={'90vh'}
             py={10}>
             {
             cartProducts.map((product) => {
@@ -141,7 +142,11 @@ function CartPage() {
                 w={'95%'}
                 maxW={1200}>
                 <Heading size={'md'}>Total Cost: ${cost}</Heading>
-                <Button colorScheme={'teal'} onClick={()=>{
+                <Button bg={'#862633'}
+                            color={'white'}
+                            _hover={
+                                {bg: '#b62633'}
+                            }onClick={()=>{
                     nav('/checkout', {state: {cartProducts, cost}})
                 }}>Checkout</Button>
             </Flex>

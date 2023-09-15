@@ -10,7 +10,7 @@ function Checkout() {
 
   return (
     <div>
-      <Container my={'1em'}>
+      <Container my={'1em'} minH={'85vh'}>
         <Heading>Checkout</Heading>
         <VStack spacing={4} mt={'1em'}>
           <Text>Enter your details</Text>
